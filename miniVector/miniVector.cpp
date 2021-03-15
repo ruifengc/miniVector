@@ -1,10 +1,12 @@
 #include "../minimemory/minimemory.h"
 #include <stdexcept>
+allocator myAlloc;
 template<typename D>
 class data{
 public:
     D d;
 public:
+    // 只在d（data）进行拷贝
     data(D data):d(data){}
     void *operator new(size_t size){
         return myAlloc.allocate(size);
@@ -29,7 +31,8 @@ public:
         for(int i=0;i<num;i++)
             new data<T>(value);
     }
-    void add(T value){
+    // 打两个可以接收左值和右值 一个只能接受左值
+    void add(T&& value){
         new data<T>(value);
     }
     void del(size_t index){
@@ -55,8 +58,9 @@ int main(){
     for(int i=2;i<12;i++){
         vll.add(i);
     }
-    vll.del(2);
-    vll.del(3);
+    // TODO bug 删除后内存不是连续存放的了，除了增加链表结构如何才能实现遍历。。。
+    // vll.del(2);
+    // vll.del(3);
     auto l = vll.begin();
     while(l!=vll.end()){
         cout<<(*l).d<<std::endl;

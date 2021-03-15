@@ -25,5 +25,5 @@ private:
     obj* __allocate__freeStore(size_t size);
     void* memcpy(void* dst, const void* src, int count);
 };
-allocator myAlloc;
+
 #endif
