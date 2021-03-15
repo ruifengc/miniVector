@@ -5,5 +5,6 @@ minimemory/minimemory.o:minimemory/minimemory.cpp minimemory/minimemory.h
 	g++ -c minimemory/minimemory.cpp -o minimemory/minimemory.o
 miniVector/miniVector.o:miniVector/miniVector.cpp
 	g++ -c miniVector/miniVector.cpp -o miniVector/miniVector.o
-clean:
-	rm miniVector.out minimemory/minimemory.o miniVector/miniVector.o
+.PHONY : clean
+clean :
+	-rm edit $(objects)
